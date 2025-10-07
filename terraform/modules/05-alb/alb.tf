@@ -97,16 +97,17 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-resource "aws_lb_listener_certificate" "marathon" {
-  listener_arn    = aws_lb_listener.https.arn
-  certificate_arn = "arn:aws:acm:eu-central-1:978652145382:certificate/91f4ccef-8f25-4c25-a3e7-1e02d256e02d"
-}
+# resource "aws_lb_listener_certificate" "marathon" {
+#   listener_arn    = aws_lb_listener.https.arn
+#   certificate_arn = "arn:aws:acm:eu-central-1:978652145382:certificate/91f4ccef-8f25-4c25-a3e7-1e02d256e02d"
+# }
 
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.this.arn
   port              = var.web_ui_port
   protocol          = "HTTPS"
-
+  certificate_arn = "arn:aws:acm:eu-central-1:978652145382:certificate/91f4ccef-8f25-4c25-a3e7-1e02d256e02d"
+  
   default_action {
     type             = "forward"
     

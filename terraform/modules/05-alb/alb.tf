@@ -254,13 +254,13 @@ resource "aws_lb_listener_rule" "https_backend_host" {
   }
 }
 
-resource "aws_lb_listener_rule" "https_anniversary_path" {
+resource "aws_lb_listener_rule" "https_anniversary_path" {  
   listener_arn = aws_lb_listener.https.arn
   priority     = 600
 
   condition {
     host_header {
-      values = ["anniversary.${var.domain_name}"]
+      values = ["anniversary.${var.domain_name}"] # Match hostname
     }
   }
 
@@ -268,21 +268,7 @@ resource "aws_lb_listener_rule" "https_anniversary_path" {
     type = "fixed-response"
     fixed_response {
       content_type = "text/html"
-      message_body = <<HTML
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Happy Anniversary!&lt;/title&gt;
-&lt;/head&gt;
-&lt;body style=&quot;background-color: #f2f4f7; text-align: center; font-family: Arial, sans-serif; padding: 50px;&quot;&gt;
-    &lt;div style=&quot;border: 3px solid #2368a0; border-radius: 15px; padding: 20px; display: inline-block; background-color: #ffffff;&quot;&gt;
-        &lt;h1 style=&quot;color: #2368a0;&quot;&gt;🎉 Happy EPAM Ukraine 20 Anniversary! 🎉&lt;/h1&gt;
-        &lt;p style=&quot;font-size: 18px; color: #555;&quot;&gt;Celebrating 20 incredible years of&lt;br&gt;innovation, excellence, and teamwork!&lt;/p&gt;
-        &lt;footer style=&quot;margin-top: 20px; font-size: 12px; color: #2368a0;&quot;&gt;#WeAreEPAM | #20YearsTogether&lt;/footer&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-HTML
+      message_body = "<!DOCTYPE html><html><head><title>Happy Anniversary!</title></head><body style=\"background-color: #f2f4f7; text-align: center; font-family: Arial, sans-serif; padding: 50px;\"><div style=\"border: 3px solid #2368a0; border-radius: 15px; padding: 20px; display: inline-block; background-color: #ffffff;\"><h1 style=\"color: #2368a0;\">&#x1F389; Happy EPAM Ukraine 20 Anniversary! &#x1F389;</h1><p style=\"font-size: 18px; color: #555;\">Celebrating 20 incredible years of<br>innovation, excellence, and teamwork!</p><footer style=\"margin-top: 20px; font-size: 12px; color: #2368a0;\">#WeAreEPAM | #20YearsTogether</footer></div></body></html>"
       status_code = "200"
     }
   }

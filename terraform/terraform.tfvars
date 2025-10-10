@@ -84,4 +84,4 @@ db_subnet_group_name = "rds-private-subnet-group"
 ################################################################################
 
 domain_name = "marathon2025.pp.ua"
-certificate_arn = "arn:aws:acm:eu-central-1:978652145382:certificate/695077cf-11a9-4d82-88cc-b018a138f921"
+certificate_arn = "arn:aws:acm:eu-central-1:978652145382:certificate/c7c11636-12b2-4fad-a119-2607c87d86e4"

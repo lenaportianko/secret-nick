@@ -381,7 +381,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PSQL_PASSWORD: "12345"
     strategy:
+      fail-fast: false
       matrix:
         config: [Angular_Headless, React_Headless]
     
@@ -397,9 +400,9 @@ jobs:
         run: |
           cat > .env << EOF
           PSQL_USER=admin
-          PSQL_PASSWORD=${{ secrets.PSQL_PASSWORD }}
+          PSQL_PASSWORD=$PSQL_PASSWORD
           PSQL_DB=itm
-          CONNECTIONSTRINGS__DBCONNECTIONSTRING=Host=db;Port=5432;Database=itm;Username=admin;Password=${{ secrets.PSQL_PASSWORD }}
+          CONNECTIONSTRINGS__DBCONNECTIONSTRING=Host=db;Port=5432;Database=itm;Username=admin;Password=$PSQL_PASSWORD
           EOF
       
       - name: Start Docker services
@@ -409,7 +412,7 @@ jobs:
       
       - name: Wait for services
         run: |
-          timeout 60 bash -c 'until curl -f http://localhost:8080/health; do sleep 2; done'
+          timeout 60 bash -c 'until curl -f http://localhost:8080/swagger/index.html; do sleep done'
           timeout 60 bash -c 'until curl -f http://localhost:8081; do sleep 2; done'
           timeout 60 bash -c 'until curl -f http://localhost:8082; do sleep 2; done'
       
@@ -418,7 +421,7 @@ jobs:
           echo "=== Docker containers ==="
           docker compose ps
           echo "=== Backend API ==="
-          curl -v http://localhost:8080/health
+          curl -v http://localhost:8080/swagger/index.html
           echo "=== Angular UI ==="
           curl -I http://localhost:8081
           echo "=== React UI ==="
@@ -436,7 +439,7 @@ jobs:
         working-directory: testautomation/SecretNick.TestAutomation/Tests
         run: |
           # Adjust path based on your TargetFramework (netX.0)
-          pwsh bin/Debug/net*/playwright.ps1 install --with-deps chromium
+          pwsh bin/${{ matrix.config }}/net9.0/playwright.ps1 install --with-deps chromium
       
       - name: Run tests
         working-directory: testautomation/SecretNick.TestAutomation/Tests
@@ -502,11 +505,11 @@ steps:
   displayName: 'Start services'
 
 - script: |
-    timeout 60 bash -c 'until curl -f http://localhost:8080/health; do sleep 2; done'
+    timeout 60 bash -c 'until curl -f http://localhost:8080/swagger/index.html; do sleep 2; done'
     timeout 60 bash -c 'until curl -f http://localhost:$(frontendPort); do sleep 2; done'
     echo "=== Services ready ==="
     docker compose ps
-    curl -v http://localhost:8080/health
+    curl -v http://localhost:8080/swagger/index.html
     curl -I http://localhost:$(frontendPort)
   displayName: 'Wait and verify services'
 
@@ -584,14 +587,14 @@ phases:
       
       - docker compose up -d
       - sleep 30
-      - timeout 60 bash -c 'until curl -f http://localhost:8080/health; do sleep 2; done'
+      - timeout 60 bash -c 'until curl -f http://localhost:8080/swagger/index.html; do sleep 2; done'
       - timeout 60 bash -c 'until curl -f http://localhost:8081; do sleep 2; done'
       - timeout 60 bash -c 'until curl -f http://localhost:8082; do sleep 2; done'
       - |
         echo "=== Docker services status ==="
         docker compose ps
         echo "=== Testing connectivity ==="
-        curl -v http://localhost:8080/health
+        curl -v http://localhost:8080/swagger/index.html
         curl -I http://localhost:8081
         curl -I http://localhost:8082
   
@@ -674,7 +677,7 @@ docker compose logs angular
 docker compose logs react
 
 # Test connectivity from host
-curl http://localhost:8080/health
+curl http://localhost:8080/swagger/index.html
 curl http://localhost:8081
 curl http://localhost:8082
 
@@ -695,7 +698,7 @@ pwsh bin/Debug/net9.0/playwright.ps1 install --with-deps chromium
 
 **Tests hang:**
 - Check `DefaultTimeout` in appsettings
-- Verify application is accessible: `curl http://localhost:8080/health`
+- Verify application is accessible: `curl http://localhost:8080/swagger/index.html`
 - Check Docker container logs: `docker compose logs`
 
 **Docker services not starting:**

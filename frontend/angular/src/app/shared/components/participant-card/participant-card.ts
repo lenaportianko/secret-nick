@@ -58,6 +58,8 @@ export class ParticipantCard {
   public readonly ariaLabelCopy = AriaLabel.ParticipantLink;
   public readonly iconInfo = IconName.Info;
   public readonly ariaLabelInfo = AriaLabel.Info;
+  public readonly iconDelete = IconName.Delete;
+  public readonly ariaLabeDelete = AriaLabel.Delete;
 
   @HostBinding('tabindex') tab = 0;
   @HostBinding('class.list-row') rowClass = true;

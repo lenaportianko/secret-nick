@@ -25,6 +25,7 @@ import { ModalService } from '../../../core/services/modal';
 import { getPersonalInfo } from '../../../utils/get-personal-info';
 import { UserService } from '../../../room/services/user';
 import type { User } from '../../../app.models';
+import { RoomService } from '../../../room/services/room';
 
 @Component({
   selector: 'li[app-participant-card]',
@@ -45,6 +46,9 @@ export class ParticipantCard {
   readonly #host = inject(ElementRef<HTMLElement>);
   readonly #modalService = inject(ModalService);
   readonly #userService = inject(UserService);
+  readonly #roomService = inject(RoomService);
+
+  public readonly isRoomDrawn = this.#roomService.isRoomDrawn;
 
   public readonly isCurrentUser = computed(() => {
     const code = this.userCode();

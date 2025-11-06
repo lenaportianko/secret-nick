@@ -12,6 +12,7 @@ export const enum IconName {
   Copy = 'copy',
   Edit = 'edit',
   Save = 'save',
+  Delete = 'delete',
   Add = 'plus',
   ArrowLeft = 'arrow-left',
   SuccessMark = 'success-mark',
@@ -31,6 +32,7 @@ export const enum AriaLabel {
   Close = 'Close',
   ParticipantLink = 'Copy personal link',
   Info = 'Info',
+  Delete = 'Remove',
 }
 
 export const enum InputSidebarText {

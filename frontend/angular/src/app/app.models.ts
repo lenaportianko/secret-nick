@@ -18,6 +18,7 @@ import { MyWishlistModal } from './room/components/my-wishlist/components/my-wis
 import { PersonalInfoModal } from './room/components/personal-info-modal/personal-info-modal';
 import { InvitationModal } from './shared/components/invitation-modal/invitation-modal';
 import { ParticipantInfoModal } from './room/components/participant-info-modal/participant-info-modal';
+import { ConfirmDeleteParticipantModal } from './room/components/confirm-delete-participant-modal/confirm-delete-participant-modal';
 
 export interface StepperItem {
   isActive: boolean;
@@ -181,6 +182,7 @@ export type ModalComponentType = Type<
   | PersonalInfoModal
   | InvitationModal
   | ParticipantInfoModal
+  | ConfirmDeleteParticipantModal
 >;
 
 export interface GifteePersonalInfoItem {

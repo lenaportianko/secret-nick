@@ -26,6 +26,7 @@ import { getPersonalInfo } from '../../../utils/get-personal-info';
 import { UserService } from '../../../room/services/user';
 import type { User } from '../../../app.models';
 import { RoomService } from '../../../room/services/room';
+import { ConfirmDeleteParticipantModal } from '../../../room/components/confirm-delete-participant-modal/confirm-delete-participant-modal';
 
 @Component({
   selector: 'li[app-participant-card]',
@@ -110,6 +111,10 @@ export class ParticipantCard {
     this.#showPopup();
   }
 
+  public onDeleteClick(): void {
+    this.#openConfirmModal();
+  }
+
   public onCopyHover(target: EventTarget | null): void {
     if (target instanceof HTMLElement) {
       this.#popup.show(
@@ -171,6 +176,17 @@ export class ParticipantCard {
         type: MessageType.Info,
       },
       true
+    );
+  }
+
+  #openConfirmModal(): void {
+    this.#modalService.openWithResult(
+      ConfirmDeleteParticipantModal,
+      undefined,
+      {
+        buttonAction: () => this.#modalService.close(),
+        closeModal: () => this.#modalService.close(),
+      }
     );
   }
 }

@@ -48,7 +48,7 @@
           }
 
           <app-button
-            class="primary medium"
+            [class]="buttonState() + ' medium'"
             [text]="buttonText()"
             (click)="onActionButtonClick()"
           />

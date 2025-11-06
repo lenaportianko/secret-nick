@@ -2,6 +2,7 @@ import { Component, input, output } from '@angular/core';
 
 import { CommonModalTemplate } from '../../../shared/components/modal/common-modal-template/common-modal-template';
 import {
+  ButtonState,
   ButtonText,
   ModalSubtitle,
   ModalTitle,
@@ -23,6 +24,7 @@ export class ConfirmDeleteParticipantModal {
   public readonly title = ModalTitle.RemoveParticipant;
   public readonly subtitle = ModalSubtitle.RemoveParticipant;
   public readonly buttonText = ButtonText.Remove;
+  public readonly buttonState = ButtonState.Warning;
   public readonly cancelButtonText = ButtonText.Cancel;
 
   readonly closeModal = output<void>();

@@ -174,6 +174,12 @@ export const enum ButtonType {
   Submit = 'submit',
 }
 
+export const enum ButtonState {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Warning = 'warning',
+}
+
 export const enum PictureName {
   Car = 'car',
   BigPresents = 'big-presents',

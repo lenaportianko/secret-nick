@@ -180,9 +180,11 @@ export class ParticipantCard {
   }
 
   #openConfirmModal(): void {
+    const { id, firstName, lastName } = this.participant();
+
     this.#modalService.openWithResult(
       ConfirmDeleteParticipantModal,
-      undefined,
+      { id, name: `${firstName} ${lastName}`.trim() },
       {
         buttonAction: () => this.#modalService.close(),
         closeModal: () => this.#modalService.close(),

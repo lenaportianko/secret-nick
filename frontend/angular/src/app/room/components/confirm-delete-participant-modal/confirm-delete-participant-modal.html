@@ -1,1 +1,16 @@
-<p>confirm-delete-participant-modal works!</p>
+<app-common-modal-template
+  [headerPictureName]="pictureName"
+  [headerTitle]="title"
+  [subtitle]="subtitle"
+  [buttonText]="buttonText"
+  [cancelButtonText]="cancelButtonText"
+  (buttonAction)="onActionButtonClick()"
+  (cancelButtonAction)="onCloseModal()"
+  (closeModal)="onCloseModal()"
+>
+  <p>
+    Are you sure you want to remove <b>{{ name() }}</b> from the room? This
+    participant will lose access to the room and won’t be part of the Secret
+    Nick game anymore.
+  </p>
+</app-common-modal-template>

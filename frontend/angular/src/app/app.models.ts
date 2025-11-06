@@ -172,7 +172,8 @@ export type ModalInputs =
   | GifteeInfoModalInputs
   | MyWishlistModalInputs
   | PersonalInfoModalInputs
-  | InvitationModalInputs;
+  | InvitationModalInputs
+  | RemoveParticipantModalInputs;
 
 export type ModalOutputs = Record<string, (...args: unknown[]) => void>;
 
@@ -212,6 +213,11 @@ export interface InvitationModalInputs {
   roomLink: string;
   invitationNote: string;
   userCode: string;
+}
+
+export interface RemoveParticipantModalInputs {
+  id: number;
+  name: string;
 }
 
 export interface LottieConfig {

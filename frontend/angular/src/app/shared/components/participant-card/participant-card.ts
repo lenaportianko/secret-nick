@@ -186,7 +186,10 @@ export class ParticipantCard {
       ConfirmDeleteParticipantModal,
       { id, name: `${firstName} ${lastName}`.trim() },
       {
-        buttonAction: () => this.#modalService.close(),
+        buttonAction: () => {
+          this.#userService.deleteUser(id).subscribe();
+          this.#modalService.close();
+        },
         closeModal: () => this.#modalService.close(),
       }
     );

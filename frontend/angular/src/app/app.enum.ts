@@ -122,6 +122,7 @@ export enum ToastMessage {
   PleaseCreateYourRoom = 'Please create your room first.',
   PleaseJoinTheRoom = 'Please join the room first',
   SuccessDrawNames = 'Success! All participants are matched.\nLet the gifting magic start!',
+  SuccessDeleteParticipant = 'Participant successfully removed',
 }
 
 export const enum InputType {

@@ -45,7 +45,7 @@ runs:
       run: |
         echo "Determining BASE_API_URL..."
 
-        DOMAIN_NAME=$(grep -Po '^\s*domain_name\s*=\s*"\K[^"]+' terraform/terraform.tfvars || echo "marathon2025.pp.ua")
+        DOMAIN_NAME=$(grep -Po '^\s*domain_name\s*=\s*"\K[^"]+' terraform/terraform.tfvars || echo "secretnickapp.pp.ua")
         echo "got: $DOMAIN_NAME"
 
         ALB_DNS=$(aws elbv2 describe-load-balancers \

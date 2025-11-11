@@ -60,7 +60,7 @@ runs:
         if [[ "$RESPONSE" == "200" ]] ; then
           BASE_API_URL="$TEMP_URL"
         else
-          BASE_API_URL="http://${ALB_DNS}"
+          BASE_API_URL="https://${ALB_DNS}"
         fi
 
         echo "BASE_API_URL=$BASE_API_URL"

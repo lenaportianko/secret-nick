@@ -12,6 +12,7 @@ export const enum IconName {
   Copy = 'copy',
   Edit = 'edit',
   Save = 'save',
+  Delete = 'delete',
   Add = 'plus',
   ArrowLeft = 'arrow-left',
   SuccessMark = 'success-mark',
@@ -31,6 +32,7 @@ export const enum AriaLabel {
   Close = 'Close',
   ParticipantLink = 'Copy personal link',
   Info = 'Info',
+  Delete = 'Remove',
 }
 
 export const enum InputSidebarText {
@@ -120,6 +122,7 @@ export enum ToastMessage {
   PleaseCreateYourRoom = 'Please create your room first.',
   PleaseJoinTheRoom = 'Please join the room first',
   SuccessDrawNames = 'Success! All participants are matched.\nLet the gifting magic start!',
+  SuccessDeleteParticipant = 'Participant successfully removed',
 }
 
 export const enum InputType {
@@ -164,11 +167,18 @@ export const enum ButtonText {
   ViewWishlist = 'View Wishlist',
   Cancel = 'Cancel',
   ViewInformation = 'View Information',
+  Remove = 'Remove',
 }
 
 export const enum ButtonType {
   Button = 'button',
   Submit = 'submit',
+}
+
+export const enum ButtonState {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Warning = 'warning',
 }
 
 export const enum PictureName {
@@ -184,6 +194,7 @@ export const enum PictureName {
   StNick = 'st-nick',
   Cookie = 'cookie',
   Invitation = 'invitation',
+  Attention = 'attention',
 }
 
 export const enum FormTitle {
@@ -292,12 +303,14 @@ export const enum ModalTitle {
   ParticipantDetails = 'Participant Details',
   PersonalInformation = 'Personal Information',
   Invitation = 'Invite New Members',
+  RemoveParticipant = 'Remove Participant',
 }
 
 export const enum ModalSubtitle {
   ParticipantInfo = 'Everything about your Secret Nick player!',
   PersonalInfo = 'Secret Nick needs to know where to send your present!',
   Invitation = 'Share the link below with 20 friends to invite them',
+  RemoveParticipant = 'You want to remove Secret Nick player',
 }
 
 export const enum PersonalInfoTerm {

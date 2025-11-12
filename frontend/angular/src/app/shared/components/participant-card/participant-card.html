@@ -34,4 +34,13 @@
       (click)="onInfoClick()"
     />
   }
+
+  @if (isCurrentUserAdmin() && !participant().isAdmin) {
+    <app-icon-button
+      [iconName]="iconDelete"
+      [ariaLabel]="ariaLabeDelete"
+      [isButtonDisabled]="isRoomDrawn()"
+      (click)="onDeleteClick()"
+    />
+  }
 </span>

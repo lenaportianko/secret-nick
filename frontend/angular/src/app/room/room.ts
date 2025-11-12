@@ -115,13 +115,17 @@ export class Room implements OnInit {
   }
 
   public onReadDetails(): void {
+    const user = this.#userService
+      .users()
+      .find((user) => user.id === this.currentUser()?.giftToUserId)!;
+
     this.#modalService.openWithResult(
       GifteeInfoModal,
       {
-        personalInfo: getPersonalInfo(this.currentUser()),
+        personalInfo: getPersonalInfo(user),
         wishListInfo: {
-          interests: this.currentUser()?.interests || '',
-          wishList: this.currentUser()?.wishList || [],
+          interests: user.interests || '',
+          wishList: user.wishList || [],
         },
       },
       {

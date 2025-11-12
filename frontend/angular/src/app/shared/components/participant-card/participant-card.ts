@@ -25,6 +25,8 @@ import { ModalService } from '../../../core/services/modal';
 import { getPersonalInfo } from '../../../utils/get-personal-info';
 import { UserService } from '../../../room/services/user';
 import type { User } from '../../../app.models';
+import { RoomService } from '../../../room/services/room';
+import { ConfirmDeleteParticipantModal } from '../../../room/components/confirm-delete-participant-modal/confirm-delete-participant-modal';
 
 @Component({
   selector: 'li[app-participant-card]',
@@ -45,6 +47,9 @@ export class ParticipantCard {
   readonly #host = inject(ElementRef<HTMLElement>);
   readonly #modalService = inject(ModalService);
   readonly #userService = inject(UserService);
+  readonly #roomService = inject(RoomService);
+
+  public readonly isRoomDrawn = this.#roomService.isRoomDrawn;
 
   public readonly isCurrentUser = computed(() => {
     const code = this.userCode();
@@ -58,6 +63,8 @@ export class ParticipantCard {
   public readonly ariaLabelCopy = AriaLabel.ParticipantLink;
   public readonly iconInfo = IconName.Info;
   public readonly ariaLabelInfo = AriaLabel.Info;
+  public readonly iconDelete = IconName.Delete;
+  public readonly ariaLabeDelete = AriaLabel.Delete;
 
   @HostBinding('tabindex') tab = 0;
   @HostBinding('class.list-row') rowClass = true;
@@ -102,6 +109,10 @@ export class ParticipantCard {
     }
 
     this.#showPopup();
+  }
+
+  public onDeleteClick(): void {
+    this.#openConfirmModal();
   }
 
   public onCopyHover(target: EventTarget | null): void {
@@ -165,6 +176,22 @@ export class ParticipantCard {
         type: MessageType.Info,
       },
       true
+    );
+  }
+
+  #openConfirmModal(): void {
+    const { id, firstName, lastName } = this.participant();
+
+    this.#modalService.openWithResult(
+      ConfirmDeleteParticipantModal,
+      { id, name: `${firstName} ${lastName}`.trim() },
+      {
+        buttonAction: () => {
+          this.#userService.deleteUser(id).subscribe();
+          this.#modalService.close();
+        },
+        closeModal: () => this.#modalService.close(),
+      }
     );
   }
 }

@@ -5,7 +5,7 @@ import { IconButton } from '../../icon-button/icon-button';
 import { FocusTrap } from '../../../../core/directives/focus-trap';
 import { fadeIn } from '../../../../utils/animations';
 import { FADE_IN_ANIMATION_DURATION_MS } from '../../../../app.constants';
-import { ButtonText } from '../../../../app.enum';
+import { ButtonState, ButtonText } from '../../../../app.enum';
 import { BudgetPipe } from '../../../pipes/budget.pipe';
 
 @Component({
@@ -17,6 +17,7 @@ import { BudgetPipe } from '../../../pipes/budget.pipe';
 })
 export class CommonModalTemplate extends ParentModalLayout {
   readonly subtitle = input.required<string>();
+  readonly buttonState = input<ButtonState>(ButtonState.Primary);
   readonly cancelButtonText = input<ButtonText>();
   readonly budget = input<number>();
 
